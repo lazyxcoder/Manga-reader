@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Manga Reader</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>Beneath the Surviving Princess Joyful Facade</h1>
+  </header>
 
-<h1>Manga Reader Website</h1>
-<p>This is my manga reader homepage.</p>
+  <nav>
+    <label for="chapterSelect">Select Chapter:</label>
+    <select id="chapterSelect">
+      <option value="1">Chapter 1</option>
+      <option value="2">Chapter 2</option>
+      <!-- Add more chapters here -->
+    </select>
+
+    <button id="prevBtn" disabled>Prev</button>
+    <button id="nextBtn">Next</button>
+  </nav>
+
+  <main id="chapterContent">
+    <p>Select a chapter to start reading.</p>
+  </main>
+
+  <footer>
+    <p>© 2026 Manga Reader</p>
+  </footer>
+
   <script src="script.js"></script>
-
 </body>
 </html>
