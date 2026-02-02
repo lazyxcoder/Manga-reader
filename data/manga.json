@@ -1,0 +1,15 @@
+{
+  "title": "Omniscient Reader",
+  "chapters": [
+    {
+      "id": 1,
+      "name": "Chapter 1",
+      "file": "cbz/orv/ch01.cbz"
+    },
+    {
+      "id": 2,
+      "name": "Chapter 2",
+      "file": "cbz/orv/ch02.cbz"
+    }
+  ]
+}
