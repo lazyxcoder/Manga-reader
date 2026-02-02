@@ -1,15 +1,15 @@
-{
-  "title": "Omniscient Reader",
-  "chapters": [
-    {
-      "id": 1,
-      "name": "Chapter 1",
-      "file": "cbz/orv/ch01.cbz"
-    },
-    {
-      "id": 2,
-      "name": "Chapter 2",
-      "file": "cbz/orv/ch02.cbz"
-    }
+const mangaData = {
+  title: "Omniscient Reader",
+  chapters: [
+    { id: 1, name: "Chapter 1", file: "cbz/orv/ch01.cbz" },
+    { id: 2, name: "Chapter 2", file: "cbz/orv/ch02.cbz" },
+    { id: 3, name: "Chapter 3", file: "cbz/orv/ch03.cbz" },
+    { id: 4, name: "Chapter 4", file: "cbz/orv/ch04.cbz" },
+    { id: 5, name: "Chapter 5", file: "cbz/orv/ch05.cbz" },
+    { id: 6, name: "Chapter 6", file: "cbz/orv/ch06.cbz" },
+    { id: 7, name: "Chapter 7", file: "cbz/orv/ch07.cbz" },
+    { id: 8, name: "Chapter 8", file: "cbz/orv/ch08.cbz" },
+    { id: 9, name: "Chapter 9", file: "cbz/orv/ch09.cbz" },
+    { id: 10, name: "Chapter 10", file: "cbz/orv/ch10.cbz" }
   ]
-}
+};
