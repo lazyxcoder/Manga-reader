@@ -1,49 +1,66 @@
- const chapterSelect = document.getElementById('chapterSelect');
+const chapterSelect = document.getElementById('chapterSelect');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const chapterContent = document.getElementById('chapterContent');
 
-const totalChapters = chapterSelect.options.length;
+let chapters = [];
 
-function loadChapter(chapterNumber) {
-  // Clear existing content
-  chapterContent.innerHTML = '';
+function loadChapter(chapterIndex) {
+  if (chapterIndex < 0 || chapterIndex >= chapters.length) return;
 
-  // Placeholder: Load chapter pages here
-  // For now, just show a message with chapter number
-  const message = document.createElement('p');
-  message.textContent = `You are now reading Chapter ${chapterNumber}. Manga pages will show here.`;
-  chapterContent.appendChild(message);
+  const chapter = chapters[chapterIndex];
+  chapterContent.innerHTML = `<p>Now reading: ${chapter.name}</p>`;
 
-  // Enable/disable buttons accordingly
-  prevBtn.disabled = chapterNumber <= 1;
-  nextBtn.disabled = chapterNumber >= totalChapters;
-
-  // Update dropdown value if not synced
-  if (parseInt(chapterSelect.value) !== chapterNumber) {
-    chapterSelect.value = chapterNumber;
-  }
+  chapterSelect.value = chapter.id;
+  prevBtn.disabled = chapterIndex === 0;
+  nextBtn.disabled = chapterIndex === chapters.length - 1;
 }
 
-// Event listeners
+function findChapterIndexById(id) {
+  return chapters.findIndex(chap => chap.id === id);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('data/manga.json')
+    .then(res => res.json())
+    .then(data => {
+      chapters = data.chapters;
+
+      // Clear current options
+      chapterSelect.innerHTML = '';
+
+      // Add options dynamically
+      chapters.forEach(chapter => {
+        const option = document.createElement('option');
+        option.value = chapter.id;
+        option.textContent = chapter.name;
+        chapterSelect.appendChild(option);
+      });
+
+      // Load first chapter by default
+      loadChapter(0);
+    })
+    .catch(err => {
+      chapterContent.textContent = 'Failed to load chapters.';
+      console.error(err);
+    });
+});
+
+// Handle select change
 chapterSelect.addEventListener('change', () => {
-  const selectedChapter = parseInt(chapterSelect.value);
-  loadChapter(selectedChapter);
+  const selectedId = parseInt(chapterSelect.value);
+  const index = findChapterIndexById(selectedId);
+  if (index !== -1) loadChapter(index);
 });
 
+// Prev button click
 prevBtn.addEventListener('click', () => {
-  let current = parseInt(chapterSelect.value);
-  if (current > 1) {
-    loadChapter(current - 1);
-  }
+  const currentIndex = findChapterIndexById(parseInt(chapterSelect.value));
+  if (currentIndex > 0) loadChapter(currentIndex - 1);
 });
 
+// Next button click
 nextBtn.addEventListener('click', () => {
-  let current = parseInt(chapterSelect.value);
-  if (current < totalChapters) {
-    loadChapter(current + 1);
-  }
+  const currentIndex = findChapterIndexById(parseInt(chapterSelect.value));
+  if (currentIndex < chapters.length - 1) loadChapter(currentIndex + 1);
 });
-
-// Load first chapter by default
-loadChapter(1);
